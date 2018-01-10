@@ -1,54 +1,56 @@
- (function($) {
- // Smooth scrolling using jQuery easing
-  $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      if (target.length) {
-        $('html, body').animate({
-          scrollTop: target.offset().top
-        }, 1000, "easeInOutExpo");
-        return false;
-      }
-    }
-  });
-    $(document).scroll(function() {
-    var scrollDistance = $(this).scrollTop();
-    if (scrollDistance > 100) {
-      $('.scroll-to-top').fadeIn();
-    } else {
-      $('.scroll-to-top').fadeOut();
-    }
-  });
-})
+$(document).ready(function(){
+	
+	// Variables
+	var clickedTab = $(".tabs > .active");
+	var tabWrapper = $(".tab__content");
+	var activeTab = tabWrapper.find(".active");
+	var activeTabHeight = activeTab.outerHeight();
+	
+	// Show tab on page load
+	activeTab.show();
+	
+	// Set height of wrapper on page load
+	tabWrapper.height(activeTabHeight);
+	
+	$(".tabs > li").on("click", function() {
+		
+		// Remove class from active tab
+		$(".tabs > li").removeClass("active");
+		
+		// Add class active to clicked tab
+		$(this).addClass("active");
+		
+		// Update clickedTab variable
+		clickedTab = $(".tabs .active");
+		
+		// fade out active tab
+		activeTab.fadeOut(250, function() {
+			
+			// Remove active class all tabs
+			$(".tab__content > li").removeClass("active");
+			
+			// Get index of clicked tab
+			var clickedTabIndex = clickedTab.index();
 
-// Wrap every letter in a span
-$('.ml16').each(function(){
-  $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+			// Add class active to corresponding tab
+			$(".tab__content > li").eq(clickedTabIndex).addClass("active");
+			
+			// update new active tab
+			activeTab = $(".tab__content > .active");
+			
+			// Update variable
+			activeTabHeight = activeTab.outerHeight();
+			
+			// Animate height of wrapper to new tab height
+			tabWrapper.stop().delay(50).animate({
+				height: activeTabHeight
+			}, 500, function() {
+				
+				// Fade in active tab
+				activeTab.delay(50).fadeIn(250);
+				
+			});
+		});
+	});
+	particlesJS("particles-js", {"particles":{"number":{"value":40,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":1,"random":true,"anim":{"enable":true,"speed":1.038894616128439,"opacity_min":0,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":4,"size_min":0.3,"sync":false}},"line_linked":{"enable":false,"distance":15.783201938177186,"color":"#ffffff","opacity":0,"width":1},"move":{"enable":true,"speed":1,"direction":"top","random":true,"straight":true,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":600}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":false,"mode":"repulse"},"resize":true},"modes":{"grab":{"distance":130,"line_linked":{"opacity":1}},"bubble":{"distance":250,"size":0,"duration":2,"opacity":0,"speed":3},"repulse":{"distance":400,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
 });
-
-anime.timeline({loop: false})
-  .add({
-    targets: '.ml16 .letter',
-    translateY: [-100,0],
-    easing: "easeOutExpo",
-    duration: 1400,
-    delay: function(el, i) {
-      return 30 * i;
-    }
-  })
-// Wrap every letter in a span
-$('.ml9 .letters').each(function(){
-  $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
-});
-
-anime.timeline({loop: false})
-  .add({
-    targets: '.ml9 .letter',
-    scale: [0, 1],
-    duration: 1500,
-    elasticity: 600,
-    delay: function(el, i) {
-      return 30 * (i+1)
-    }
-  })
