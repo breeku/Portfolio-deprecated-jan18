@@ -94,7 +94,7 @@ p{
 }
 
 .tab__content {
-  background-color: rgba(40, 40, 40, 0);
+  background-color: rgba(40, 40, 40, 0.5);
   position: relative;
   width: 100%;
   border-radius: 5px;
