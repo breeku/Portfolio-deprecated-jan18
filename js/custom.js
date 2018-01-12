@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	// Variables
 	var clickedTab = $(".tabs > .active");
 	var tabWrapper = $(".tab__content");

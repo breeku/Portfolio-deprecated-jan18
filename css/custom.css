@@ -5,12 +5,33 @@ html,body{
 	padding: 0;
 	margin: 0;
 }
+.container{
+max-width: 19%;
+}
+.maxwidth{
+max-width: 30%;
+}
 .logo{
 	padding-top: 1.5rem;
-	width: 100px;
+	max-width: 100px;
+	max-height: 100px;
     display: block;
     margin: 0 auto;
 }
+.icon{
+	min-width: 100px;
+	max-width: 100px;
+	padding-top: 0.7rem;
+	padding-bottom: 0.7rem;
+	padding-right: 0.7rem;
+	-webkit-filter: grayscale(100%);
+	transition: transform .2s;
+}
+.icon:hover{
+	transform: scale(1.2);
+	-webkit-filter: grayscale(0%);
+}
+
 h1{
 color: #ff3333;
 font-weight: 900;
@@ -28,6 +49,9 @@ margin-top: -12px;
 font-family: 'Crimson Text', serif;
 font-size: 1.7rem;
 color: #d9d9d9;
+}
+.text h6{
+	color: #000;
 }
 i{
 margin-top: 1rem;
